@@ -1,0 +1,15 @@
+<?php $this->headTitle('Afficher un contact'); ?>
+
+<h2>Afficher un contact</h2>
+
+<p>Prénom : <?= $contact->getPrenom() ?></p>
+
+<p>Nom : <?= $contact->getNom() ?></p>
+
+<?php if ($contact->getEmail()) : ?>
+<p>Email : <?= $contact->getEmail() ?></p>
+<?php endif; ?>
+
+<?php if ($contact->getTelephone()) : ?>
+<p>Téléphone : <?= $contact->getTelephone() ?></p>
+<?php endif; ?>

@@ -1,0 +1,5 @@
+<h2>Une erreur s'est produite</h2>
+
+<?php if (isset($this->display_exceptions) && $this->display_exceptions && isset($this->exception)) : ?>
+<p><?=$this->exception->getMessage()?></p>
+<?php endif; ?>
