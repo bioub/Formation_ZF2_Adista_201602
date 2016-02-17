@@ -13,7 +13,7 @@ TP Mercredi Après-midi:
 
 4 / Générer la table et les getters/setters
 
-5 / Développer les pages avec une liste de sociét
+5 / Développer le contrôleur et les vues
 
 6 / Créer le service pour accéder aux donneés de société en implémentant ServiceReadInterface
 
