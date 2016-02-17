@@ -14,6 +14,7 @@ class Module implements ConfigProviderInterface, AutoloaderProviderInterface
             include __DIR__ . '/config/module.doctrine.config.php',
             include __DIR__ . '/config/module.router.config.php',
             include __DIR__ . '/config/module.service_manager.config.php',
+            include __DIR__ . '/config/module.view_helpers.config.php',
             include __DIR__ . '/config/module.view_manager.config.php'
         );
     }

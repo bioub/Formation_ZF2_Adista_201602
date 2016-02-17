@@ -1,0 +1,19 @@
+<?php $this->headTitle('Liste des sociétés'); ?>
+
+<h2>
+    Liste des sociétés
+    <?php if (isset($ville)) : ?>
+    pour la ville <?= $this->escapeHtml($ville) ?>
+    <?php endif; ?>
+</h2>
+
+<table class="table table-striped">
+    <?php foreach ($societes as $s) : ?>
+    <tr>
+        <td><?= $this->escapeHtml($s->getNom()) ?></td>
+        <td>
+            <a href="<?= $this->url('address-book-societe/show', ['id' => $this->escapeUrl($s->getId())]) ?>" class="btn btn-xs btn-primary">Afficher</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
