@@ -1,3 +1,13 @@
 <?php $this->headTitle('Supprimer un contact'); ?>
 
 <h2>Supprimer un contact</h2>
+
+<form method="post">
+    <p>
+        Êtes-vous sûr de vouloir supprimer le contact <?= $this->escapeHtml($contact->getPrenom()) ?> <?= $this->escapeHtml($contact->getNom()) ?> ?
+    </p>
+    <p>
+        <button type="submit" class="btn btn-primary" name="confirm" value="oui">Oui</button>
+        <button type="submit" class="btn btn-default" name="confirm" value="non">Non</button>
+    </p>
+</form>

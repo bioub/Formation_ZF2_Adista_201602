@@ -2,59 +2,80 @@
 
 namespace AddressBook\Controller;
 
+use AddressBook\Service\ServiceInterface;
+use Zend\Http\Request;
+use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 class ContactController extends AbstractActionController
 {
-    protected function getRepository() 
+
+    /** @var Request */
+    protected $request;
+
+    /** @var Response */
+    protected $response;
+
+    /**
+     *
+     * @var ServiceInterface
+     */
+    protected $contactService;
+
+    public function __construct(ServiceInterface $contactService)
     {
-        $sm = $this->getServiceLocator();
-        $em = $sm->get('Doctrine\ORM\EntityManager');
-        /* @var $em \Doctrine\ORM\EntityManager */
-        return $em->getRepository(\AddressBook\Entity\Contact::class);
+        $this->contactService = $contactService;
     }
-    
+
     public function listAction()
-    {   
+    {
         return new ViewModel([
-            'contacts' => $this->getRepository()->findAll()
+            'contacts' => $this->contactService->findAll()
         ]);
     }
-    
+
     public function showAction()
-    {   
+    {
         $id = $this->params('id');
-        
-        $contact = $this->getRepository()->find($id);
-        
+
+        $contact = $this->contactService->find($id);
+
         if (!$contact) {
             return $this->createHttpNotFoundModel($this->response);
         }
-        
+
         return new ViewModel([
             'contact' => $contact
         ]);
     }
-    
+
     public function addAction()
-    {   
+    {
         return new ViewModel([
-            
         ]);
     }
-    
+
     public function modifyAction()
-    {   
+    {
         return new ViewModel([
-            
         ]);
     }
-    
+
     public function deleteAction()
-    {   
-        return new ViewModel([
-            
-        ]);
+    {
+        if ($this->request->isPost()) {
+
+            if ($this->request->getPost('confirm') === 'oui') {
+                $id = $this->params('id');
+                
+                $this->contactService->delete($id);
+            }
+
+            return $this->redirect()->toRoute('address-book-contact');
+        }
+
+        return $this->showAction();
     }
+
 }
