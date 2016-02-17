@@ -5,9 +5,9 @@
 <table class="table table-striped">
     <?php foreach ($contacts as $c) : ?>
     <tr>
-        <td><?= $c->getPrenom() ?> <?= $c->getNom() ?></td>
+        <td><?= $this->escapeHtml($c->getPrenom()) ?> <?= $this->escapeHtml($c->getNom()) ?></td>
         <td>
-            <a href="<?= $this->url('address-book-contact/show', ['id' => $c->getId()]) ?>" class="btn btn-xs btn-primary">Afficher</a>
+            <a href="<?= $this->url('address-book-contact/show', ['id' => $this->escapeUrl($c->getId())]) ?>" class="btn btn-xs btn-primary">Afficher</a>
         </td>
     </tr>
     <?php endforeach; ?>
