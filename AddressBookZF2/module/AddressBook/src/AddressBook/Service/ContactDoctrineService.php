@@ -30,7 +30,7 @@ class ContactDoctrineService implements ServiceInterface, ServiceLocatorAwareInt
     public function add($array)
     {
         $sm = $this->getServiceLocator();
-        $form = $sm->get('AddressBook\Form\Contact');
+        $form = $sm->get('FormElementManager')->get('AddressBook\Form\Contact');
         /* @var $form \AddressBook\Form\ContactForm */
         
         // TODO ajouter une clé AddressBook\InputFilter\Contact au Service Manager (idéalement dans InputFilterPluginManager)
@@ -43,7 +43,17 @@ class ContactDoctrineService implements ServiceInterface, ServiceLocatorAwareInt
             return null;
         }
         
-        return new Contact();
+        $dataFiltrees = $form->getData();
+        $hm = $this->getServiceLocator()->get('HydratorManager');
+        $hydrator = $hm->get('DoctrineModule\Stdlib\Hydrator\DoctrineObject');
+        
+        $contact = new Contact();
+        $hydrator->hydrate($dataFiltrees, $contact);
+        
+        $this->em->persist($contact);
+        $this->em->flush();
+        
+        return $contact;
     }
 
     public function delete($id)

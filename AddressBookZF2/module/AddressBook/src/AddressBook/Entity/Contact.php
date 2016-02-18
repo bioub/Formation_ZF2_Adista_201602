@@ -5,29 +5,33 @@ namespace AddressBook\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AddressBook\Repository\ContactRepository")
  * @ORM\Table(name="contact")
  */
 class Contact
 {
-    /** 
+
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     protected $id;
-    
+
     /** @ORM\Column(length=40) */
     protected $prenom;
-    
+
     /** @ORM\Column(length=40) */
     protected $nom;
-    
+
     /** @ORM\Column(length=20, nullable=true) */
     protected $telephone;
-    
+
     /** @ORM\Column(length=80, nullable=true) */
     protected $email;
+
+    /** @ORM\ManyToOne(targetEntity="AddressBook\Entity\Societe") */
+    protected $societe;
 
     /**
      * Get id
@@ -37,6 +41,12 @@ class Contact
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**
@@ -134,4 +144,29 @@ class Contact
     {
         return $this->email;
     }
+
+    /**
+     * Set societe
+     *
+     * @param \AddressBook\Entity\Societe $societe
+     *
+     * @return Contact
+     */
+    public function setSociete(\AddressBook\Entity\Societe $societe = null)
+    {
+        $this->societe = $societe;
+
+        return $this;
+    }
+
+    /**
+     * Get societe
+     *
+     * @return \AddressBook\Entity\Societe
+     */
+    public function getSociete()
+    {
+        return $this->societe;
+    }
+
 }

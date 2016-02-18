@@ -22,6 +22,7 @@ class Module implements \Zend\ModuleManager\Feature\BootstrapListenerInterface, 
         return array_merge_recursive(
             include __DIR__ . '/config/module.controllers.config.php',
             include __DIR__ . '/config/module.doctrine.config.php',
+            include __DIR__ . '/config/module.form_elements.config.php',
             include __DIR__ . '/config/module.router.config.php',
             include __DIR__ . '/config/module.service_manager.config.php',
             include __DIR__ . '/config/module.translator.config.php',

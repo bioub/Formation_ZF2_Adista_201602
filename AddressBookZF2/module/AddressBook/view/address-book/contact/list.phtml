@@ -1,5 +1,9 @@
 <?php $this->headTitle('Liste des contacts'); ?>
 
+<?php foreach ($this->flashMessenger()->getSuccessMessages() as $msg) : ?>
+<?= $this->adstAlert($msg) ?>
+<?php endforeach; ?>
+
 <h2><?= $this->translate('Contact list') ?></h2>
 
 <table class="table table-striped">
