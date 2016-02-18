@@ -16,6 +16,10 @@ class ContactInputFilter extends \Zend\InputFilter\InputFilter
         $validator->setMax(40);
         $input->getValidatorChain()->attach($validator);
         
+        $validator = new \Zend\Validator\NotEmpty();
+        $validator->setMessage('Le prénom est obligatoire', \Zend\Validator\NotEmpty::IS_EMPTY);
+        $input->getValidatorChain()->attach($validator);
+        
         $this->add($input);
         
     }
