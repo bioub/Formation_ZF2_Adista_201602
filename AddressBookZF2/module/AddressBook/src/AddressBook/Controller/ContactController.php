@@ -52,7 +52,21 @@ class ContactController extends AbstractActionController
 
     public function addAction()
     {
+        $contactForm = $this->getServiceLocator()->get('AddressBook\Form\Contact');
+        
+        if ($this->request->isPost()) {
+            $dataBrutes = $this->request->getPost();
+            
+            $contact = $this->contactService->add($dataBrutes);
+            
+            if ($contact) {
+                return $this->redirect()->toRoute('address-book-contact');
+            }
+        }
+        
+        // return new ViewModel(compact($contactForm));
         return new ViewModel([
+            'contactForm' => $contactForm
         ]);
     }
 

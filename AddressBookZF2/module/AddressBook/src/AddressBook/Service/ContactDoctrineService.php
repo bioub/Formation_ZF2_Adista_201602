@@ -2,10 +2,14 @@
 
 namespace AddressBook\Service;
 
+use AddressBook\Entity\Contact;
 use Doctrine\ORM\EntityManager;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class ContactDoctrineService implements ServiceInterface
+class ContactDoctrineService implements ServiceInterface, ServiceLocatorAwareInterface
 {
+    use ServiceLocatorAwareTrait;
 
     /**
      *
@@ -20,12 +24,26 @@ class ContactDoctrineService implements ServiceInterface
     
     public function getRepository()
     {
-        return $this->em->getRepository(\AddressBook\Entity\Contact::class);
+        return $this->em->getRepository(Contact::class);
     }
 
-    public function add($entity)
+    public function add($array)
     {
+        $sm = $this->getServiceLocator();
+        $form = $sm->get('AddressBook\Form\Contact');
+        /* @var $form \AddressBook\Form\ContactForm */
         
+        // TODO ajouter une clé AddressBook\InputFilter\Contact au Service Manager (idéalement dans InputFilterPluginManager)
+        $inputFilter = new \AddressBook\InputFilter\ContactInputFilter();
+        
+        $form->setInputFilter($inputFilter);
+        $form->setData($array);
+        
+        if (!$form->isValid()) {
+            return null;
+        }
+        
+        return new Contact();
     }
 
     public function delete($id)
@@ -52,7 +70,7 @@ class ContactDoctrineService implements ServiceInterface
         return $this->getRepository()->findAll();
     }
 
-    public function modify($entity)
+    public function modify($array)
     {
         
     }

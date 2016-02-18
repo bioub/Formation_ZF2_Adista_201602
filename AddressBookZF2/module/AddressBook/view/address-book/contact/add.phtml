@@ -1,3 +1,64 @@
 <?php $this->headTitle('Ajouter un contact'); ?>
 
 <h2>Ajouter un contact</h2>
+
+<?= $this->form()->openTag($contactForm) ?>
+
+    <div class="form-group<?php if ($contactForm->get('prenom')->getMessages()) echo ' has-error'; ?>">
+        <?= $this->formLabel($contactForm->get('prenom')) ?>
+        <?= $this->formElement($contactForm->get('prenom')->setAttribute('class', 'form-control')) ?>
+        
+        <?php if ($contactForm->get('prenom')->getMessages()) : ?>
+        <div class="help-block">
+            <?= $this->formElementErrors($contactForm->get('prenom')) ?>
+        </div>
+        <?php endif; ?>
+    </div>
+
+    <div class="form-group<?php if ($contactForm->get('nom')->getMessages()) echo ' has-error'; ?>">
+        <?= $this->formLabel($contactForm->get('nom')) ?>
+        <?= $this->formElement($contactForm->get('nom')->setAttribute('class', 'form-control')) ?>
+        
+        <?php if ($contactForm->get('nom')->getMessages()) : ?>
+        <div class="help-block">
+            <?= $this->formElementErrors($contactForm->get('nom')) ?>
+        </div>
+        <?php endif; ?>
+    </div>
+
+    <div class="form-group<?php if ($contactForm->get('email')->getMessages()) echo ' has-error'; ?>">
+        <?= $this->formLabel($contactForm->get('email')) ?>
+        <?= $this->formElement($contactForm->get('email')->setAttribute('class', 'form-control')) ?>
+        
+        <?php if ($contactForm->get('email')->getMessages()) : ?>
+        <div class="help-block">
+            <?= $this->formElementErrors($contactForm->get('email')) ?>
+        </div>
+        <?php endif; ?>
+    </div>
+
+    <div class="form-group<?php if ($contactForm->get('telephone')->getMessages()) echo ' has-error'; ?>">
+        <?= $this->formLabel($contactForm->get('telephone')) ?>
+        <?= $this->formElement($contactForm->get('telephone')->setAttribute('class', 'form-control')) ?>
+        
+        <?php if ($contactForm->get('telephone')->getMessages()) : ?>
+        <div class="help-block">
+            <?= $this->formElementErrors($contactForm->get('telephone')) ?>
+        </div>
+        <?php endif; ?>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+
+<?= $this->form()->closeTag() ?>
+
+<?php $this->headStyle()->captureStart(); ?>
+/*label {
+    display: block;
+}
+
+span {
+    display: inline-block;
+    width: 120px;
+}*/
+<?php $this->headStyle()->captureEnd(); ?>

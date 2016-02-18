@@ -60,7 +60,7 @@ return array(
             'Zend\Log\LoggerAbstractServiceFactory',
         ),
         'factories' => array(
-            'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'translator' => \Zend\Mvc\Service\TranslatorServiceFactory::class,
         ),
     ),
     'translator' => array(

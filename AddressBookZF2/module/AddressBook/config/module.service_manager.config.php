@@ -2,6 +2,9 @@
 
 return [
     'service_manager' => [
+        'invokables' => [
+            'AddressBook\Form\Contact' => \AddressBook\Form\ContactForm::class
+        ],
         'aliases' => [
             'AddressBook\Service\Contact' => 'AddressBook\Service\ContactDoctrine',
             'AddressBook\Service\Societe' => 'AddressBook\Service\SocieteDoctrine'
